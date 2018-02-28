@@ -6,13 +6,17 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import 'hammerjs';
 
+import {LoginService} from './services/login.service';
+import {UserService} from './services/user.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 
 
@@ -20,7 +24,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +35,13 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     routing,
     HttpModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
