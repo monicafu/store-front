@@ -5,12 +5,10 @@
 		<div class="navbar-header">
 			<a class="navbar-brand pointer" routerLInk="/home">LET'S BOOKSTORE</a>
 		</div>
-	
-
 		<div id="navbar">
 			<ul class="nav navbar-nav navbar-left">
 				<li>
-					<a mat-button routerLink="/bookList">
+					<a md-button routerLink="/bookList">
 					BOOK
 					</a>
 				</li>
@@ -23,16 +21,16 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li *ngIf="!loggedIn">
-					<a mat-button routerLink="/myAccount">MY ACCOUNT</a>
+					<a md-button routerLink="/myAccount">MY ACCOUNT</a>
 				</li>
 				<li *ngIf="!loggedIn">
-					<a mat-button routerLink="/shoppingCar">MY SHOPPING CART</a>
+					<a md-button routerLink="/shoppingCar">MY SHOPPING CART</a>
 				</li>
 				<li *ngIf="!loggedIn">
-					<a mat-button routerLink="/my Profile">MY PROFILE</a>
+					<a md-button routerLink="/my Profile">MY PROFILE</a>
 				</li>
 				<li *ngIf="!loggedIn">
-					<a mat-button (click)="logout()">LOGOUT</a>
+					<a md-button (click)="logout()">LOGOUT</a>
 				</li>
 			</ul>
 		</div>
