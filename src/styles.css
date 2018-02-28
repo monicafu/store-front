@@ -3,10 +3,7 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import './non-responsive.css';
-<<<<<<< HEAD
-=======
 
->>>>>>> dd132e71f7fbef6ee207ee83f0884dd6a4744a6e
 hr {
     border: none;
     height: 1px;
@@ -21,17 +18,6 @@ body {
     padding-top: 0;
 }
 
-<<<<<<< HEAD
-mat-input-container {
-    width: 100%;
-}
-
-mat-select {
-    width: 100%;
-}
-
-mat-slide-toggle {
-=======
 md-input-container {
     width: 100%;
 }
@@ -41,7 +27,7 @@ md-select {
 }
 
 md-slide-toggle {
->>>>>>> dd132e71f7fbef6ee207ee83f0884dd6a4744a6e
+
     width:100%;
 }
 
