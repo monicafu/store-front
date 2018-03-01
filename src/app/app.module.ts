@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import 'hammerjs';
 
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
+import { MyprofileComponent } from './components/myprofile/myprofile.component';
 
 
 
@@ -25,7 +27,8 @@ import { MyAccountComponent } from './components/my-account/my-account.component
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    MyprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { MyAccountComponent } from './components/my-account/my-account.component
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     LoginService,
