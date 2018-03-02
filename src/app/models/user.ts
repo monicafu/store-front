@@ -1,4 +1,4 @@
-//import {UserPayment} from './user-payment';
+import {UserPayment} from './user-payment';
 //import {UserShipping} from './user-shipping';
 
 export class User {
@@ -10,6 +10,6 @@ export class User {
 	public email: string
 	public phone: string;
 	public enabled: boolean;
-	//public userPaymentList: UserPayment[];
+	public userPaymentList: UserPayment[];
 	//public userShippingList: UserShipping[];
 }
