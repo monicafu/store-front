@@ -4,7 +4,10 @@ import { UserService } from '../../services/user.service';
 import { LoginService } from '../../services/login.service';
 import {User} from '../../models/user';
 import {Router} from '@angular/router';
-
+import { PaymentService } from '../../services/payment.service';
+//import { ShippingService } from '../../services/shipping.service';
+import { UserPayment } from '../../models/user-payment';
+import { UserBilling } from '../../models/user-billing';
 
 @Component({
   selector: 'app-myprofile',
@@ -30,10 +33,17 @@ export class MyprofileComponent implements OnInit {
   private selectedBillingTab: number = 0;
   private selectedShippingTab : number =0;
 
+  private userPayment: UserPayment = new UserPayment();
+  private userBilling: UserBilling = new UserBilling();
+  private userPaymentList: UserPayment[] =[];
+  private defaultPaymentSet:boolean;
+  private defaultUserPaymentId: number;
+  private stateList: string[] = [];
 
   constructor(
     private loginService : LoginService,
     private userService : UserService,
+    private paymentService :PaymentService,
     private router: Router
 
   ) { }
@@ -57,26 +67,69 @@ export class MyprofileComponent implements OnInit {
       res => {
         this.user = res.json();
         this.userPaymentList = this.user.userPaymentList;
-        this.userShippingList = this.user.userShippingList;
-
+        // this.userShippingList = this.user.userShippingList;
+        //
         for (let index in this.userPaymentList) {
           if(this.userPaymentList[index].defaultPayment) {
-            this.defaultUserPaymentId=this.userPaymentList[index].id;
+            this.defaultUserPaymentId = this.userPaymentList[index].id;
             break;
           }
         }
-
-        for (let index in this.userShippingList) {
-          if(this.userShippingList[index].userShippingDefault) {
-            this.defaultUserShippingId=this.userShippingList[index].id;
-            break;
-          }
-        }
+        //
+        // for (let index in this.userShippingList) {
+        //   if(this.userShippingList[index].userShippingDefault) {
+        //     this.defaultUserShippingId=this.userShippingList[index].id;
+        //     break;
+        //   }
+        // }
 
         this.dataFetched = true;
       },
       err => {
         console.log(err);
+      }
+    );
+  }
+
+  onNewPayment() {
+    this.paymentService.newPayment(this.userPayment).subscribe(
+      res => {
+        this.getCurrentUser();
+        this.selectedBillingTab = 0;
+        this.userPayment= new UserPayment();
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
+  }
+
+  onUpdatePayment (payment: UserPayment) {
+    this.userPayment = payment;
+    this.userBilling = payment.userBilling;
+    this.selectedBillingTab = 1;
+  }
+
+  onRemovePayment(id:number) {
+    this.paymentService.removePayment(id).subscribe(
+      res => {
+        this.getCurrentUser();
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
+  }
+
+  setDefaultPayment() {
+    this.defaultPaymentSet = false;
+    this.paymentService.setDefaultPayment(this.defaultUserPaymentId).subscribe(
+      res => {
+        this.getCurrentUser();
+        this.defaultPaymentSet = true;
+      },
+      error => {
+        console.log(error.text());
       }
     );
   }
@@ -93,6 +146,17 @@ export class MyprofileComponent implements OnInit {
       }
     );
     this.getCurrentUser();
+
+    for (let s in AppConst.usStates){
+      this.stateList.push(s);
+    }
+
+    this.userBilling.userBillingState = "";
+    this.userPayment.type = "";
+    this.userPayment.expiryMonth = "";
+    this.userPayment.expiryYear = "";
+    this.userPayment.userBilling = this.userBilling;
+    this.defaultPaymentSet = false;
   }
 
 
