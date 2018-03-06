@@ -3,6 +3,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {MyAccountComponent} from './components/my-account/my-account.component';
 import {MyprofileComponent} from "./components/myprofile/myprofile.component";
+import {BookListComponent} from './components/book-list/book-list.component';
+
 
 const appRoutes: Routes = [
 	{
@@ -21,6 +23,10 @@ const appRoutes: Routes = [
   {
     path:'myProfile',
     component:MyprofileComponent
+  },
+  {
+    path : 'bookList',
+    component : BookListComponent
   }
 ];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
