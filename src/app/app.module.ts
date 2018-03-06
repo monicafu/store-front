@@ -11,16 +11,22 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import 'hammerjs';
 
+//third party package
+import { DataTableModule} from "angular2-datatable";
+import { DataFilterPipe} from "./components/book-list/data-filter.pipe";
+
 import {LoginService} from './services/login.service';
 import {UserService} from './services/user.service';
 import {PaymentService} from './services/payment.service';
 import {ShippingService} from "./services/shipping.service";
+import {BookService} from "./services/book.service";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
+import { BookListComponent } from './components/book-list/book-list.component';
 
 
 
@@ -30,7 +36,9 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
     HomeComponent,
     NavBarComponent,
     MyAccountComponent,
-    MyprofileComponent
+    MyprofileComponent,
+    BookListComponent,
+    DataFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -42,13 +50,15 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DataTableModule
   ],
   providers: [
     LoginService,
     UserService,
     PaymentService,
-    ShippingService
+    ShippingService,
+    BookService
   ],
   bootstrap: [AppComponent]
 })
