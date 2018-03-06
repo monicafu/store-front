@@ -14,7 +14,7 @@ import 'hammerjs';
 import {LoginService} from './services/login.service';
 import {UserService} from './services/user.service';
 import {PaymentService} from './services/payment.service';
-
+import {ShippingService} from "./services/shipping.service";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -47,7 +47,8 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
   providers: [
     LoginService,
     UserService,
-    PaymentService
+    PaymentService,
+    ShippingService
   ],
   bootstrap: [AppComponent]
 })

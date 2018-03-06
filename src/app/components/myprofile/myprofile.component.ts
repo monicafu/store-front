@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConst} from "../../constants/app-const";
+import { AppConst } from "../../constants/app-const";
 import { UserService } from '../../services/user.service';
 import { LoginService } from '../../services/login.service';
-import {User} from '../../models/user';
-import {Router} from '@angular/router';
+import { User } from '../../models/user';
+import { Router } from '@angular/router';
 import { PaymentService } from '../../services/payment.service';
-//import { ShippingService } from '../../services/shipping.service';
+import { ShippingService } from '../../services/shipping.service';
 import { UserPayment } from '../../models/user-payment';
 import { UserBilling } from '../../models/user-billing';
+import { UserShipping } from "../../models/user-shipping";
 
 @Component({
   selector: 'app-myprofile',
@@ -40,13 +41,30 @@ export class MyprofileComponent implements OnInit {
   private defaultUserPaymentId: number;
   private stateList: string[] = [];
 
+
+  private userShipping: UserShipping = new UserShipping();
+  private userShippingList: UserShipping[] = [];
+
+  private defaultUserShippingId: number;
+  private defaultShippingSet: boolean;
+
+
   constructor(
     private loginService : LoginService,
     private userService : UserService,
-    private paymentService :PaymentService,
+    private paymentService : PaymentService,
+    private shippingService : ShippingService,
     private router: Router
 
   ) { }
+
+  selectedShippingChange(val: number) {
+    this.selectedShippingTab = val;
+  }
+
+  selectedBillingChange(val: number) {
+    this.selectedBillingTab = val;
+  }
 
   onUpdateUserInfo () {
     this.userService.updateUserInfo(this.user, this.newPassword, this.currentPassword).subscribe(
@@ -67,21 +85,21 @@ export class MyprofileComponent implements OnInit {
       res => {
         this.user = res.json();
         this.userPaymentList = this.user.userPaymentList;
-        // this.userShippingList = this.user.userShippingList;
-        //
+        this.userShippingList = this.user.userShippingList;
+
         for (let index in this.userPaymentList) {
           if(this.userPaymentList[index].defaultPayment) {
             this.defaultUserPaymentId = this.userPaymentList[index].id;
             break;
           }
         }
-        //
-        // for (let index in this.userShippingList) {
-        //   if(this.userShippingList[index].userShippingDefault) {
-        //     this.defaultUserShippingId=this.userShippingList[index].id;
-        //     break;
-        //   }
-        // }
+
+        for (let index in this.userShippingList) {
+          if(this.userShippingList[index].userShippingDefault) {
+            this.defaultUserShippingId=this.userShippingList[index].id;
+            break;
+          }
+        }
 
         this.dataFetched = true;
       },
@@ -134,6 +152,48 @@ export class MyprofileComponent implements OnInit {
     );
   }
 
+  onNewShipping() {
+    this.shippingService.newShipping(this.userShipping).subscribe(
+      res => {
+        this.getCurrentUser();
+        this.selectedShippingTab=0;
+        this.userShipping = new UserShipping();
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
+  }
+
+  onUpdateShipping(shipping: UserShipping) {
+    this.userShipping = shipping;
+    this.selectedShippingTab = 1;
+  }
+
+  onRemoveShipping(id: number) {
+    this.shippingService.removeShipping(id).subscribe(
+      res => {
+        this.getCurrentUser();
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
+  }
+
+  setDefaultShipping() {
+    this.defaultShippingSet = false;
+    this.shippingService.setDefaultShipping(this.defaultUserShippingId).subscribe(
+      res => {
+        this.getCurrentUser();
+        this.defaultShippingSet = true;
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
+  }
+
   ngOnInit() {
     this.loginService.checkSession().subscribe(
       res => {
@@ -157,8 +217,9 @@ export class MyprofileComponent implements OnInit {
     this.userPayment.expiryYear = "";
     this.userPayment.userBilling = this.userBilling;
     this.defaultPaymentSet = false;
+
+    this.userShipping.userShippingState="";
+    this.defaultShippingSet=false;
   }
-
-
 
 }
