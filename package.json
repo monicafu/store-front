@@ -1,6 +1,6 @@
 {
   "name": "store-front",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -57,5 +57,21 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "^2.4.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuhao-Y/store-front.git"
+  },
+  "keywords": [
+    "book",
+    "store",
+    "e-commerce"
+  ],
+  "author": "Jing Fu, Yuhao Yang",
+  "bugs": {
+    "url": "https://github.com/Yuhao-Y/store-front/issues"
+  },
+  "homepage": "https://github.com/Yuhao-Y/store-front#readme"
 }
