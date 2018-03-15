@@ -4,12 +4,13 @@ import {HomeComponent} from './components/home/home.component';
 import {MyAccountComponent} from './components/my-account/my-account.component';
 import {MyprofileComponent} from "./components/myprofile/myprofile.component";
 import {BookListComponent} from './components/book-list/book-list.component';
-
+import {BookDetailComponent} from "./components/book-detail/book-detail.component";
+import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
 
 const appRoutes: Routes = [
 	{
-		path :'',
-		redirectTo:'/home',
+		path : '',
+		redirectTo: '/home',
 		pathMatch: 'full'
 	},
 	{
@@ -21,12 +22,20 @@ const appRoutes: Routes = [
     component: MyAccountComponent
   },
   {
-    path:'myProfile',
-    component:MyprofileComponent
+    path: 'myProfile',
+    component: MyprofileComponent
   },
   {
     path : 'bookList',
     component : BookListComponent
+  },
+  {
+    path : 'bookDetail/:id',
+    component : BookDetailComponent
+  },
+  {
+    path : 'shoppingCart',
+    component : ShoppingCartComponent
   }
 ];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
