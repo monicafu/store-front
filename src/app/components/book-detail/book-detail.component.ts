@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
 import { BookService } from '../../services/book.service';
-//import { CartService } from '../../services/cart.service';
-import {Params, ActivatedRoute, Router} from '@angular/router';
-import {Http} from '@angular/http';
-import {AppConst} from '../../constants/app-const';
+import { CartService } from '../../services/cart.service';
+import { Params, ActivatedRoute, Router} from '@angular/router';
+import { Http} from '@angular/http';
+import { AppConst} from '../../constants/app-const';
 
 @Component({
   selector: 'app-book-detail',
@@ -24,24 +24,24 @@ export class BookDetailComponent implements OnInit {
 
   constructor(
     private bookService:BookService,
-    //private cartService: CartService,
+    private cartService: CartService,
     private router:Router,
     private http:Http,
     private route:ActivatedRoute
   ) { }
 
-  // onAddToCart() {
-  //   this.cartService.addItem(this.bookId, this.qty).subscribe(
-  //     res => {
-  //       console.log(res.text());
-  //       this.addBookSuccess=true;
-  //     },
-  //     err => {
-  //       console.log(err.text());
-  //       this.notEnoughStock=true;
-  //     }
-  //   );
-  // }
+  onAddToCart() {
+    this.cartService.addItem(this.bookId, this.qty).subscribe(
+      res => {
+        console.log(res.text());
+        this.addBookSuccess=true;
+      },
+      err => {
+        console.log(err.text());
+        this.notEnoughStock=true;
+      }
+    );
+  }
 
 
 

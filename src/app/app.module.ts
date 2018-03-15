@@ -20,6 +20,8 @@ import {UserService} from './services/user.service';
 import {PaymentService} from './services/payment.service';
 import {ShippingService} from "./services/shipping.service";
 import {BookService} from "./services/book.service";
+import {CartService} from "./services/cart.service";
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -62,7 +64,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     UserService,
     PaymentService,
     ShippingService,
-    BookService
+    BookService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })
