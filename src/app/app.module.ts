@@ -12,16 +12,17 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import 'hammerjs';
 
 //third party package
-import { DataTableModule} from "angular2-datatable";
-import { DataFilterPipe} from "./components/book-list/data-filter.pipe";
+import { DataTableModule } from "angular2-datatable";
+import { DataFilterPipe } from "./components/book-list/data-filter.pipe";
 
-import {LoginService} from './services/login.service';
-import {UserService} from './services/user.service';
-import {PaymentService} from './services/payment.service';
-import {ShippingService} from "./services/shipping.service";
-import {BookService} from "./services/book.service";
-import {CartService} from "./services/cart.service";
-
+import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
+import { PaymentService } from './services/payment.service';
+import { ShippingService } from "./services/shipping.service";
+import { BookService } from "./services/book.service";
+import { CartService } from "./services/cart.service";
+import { OrderService } from "./services/order.service";
+import { CheckoutService} from "./services/checkout.service";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -31,6 +32,8 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { OrderComponent } from './components/order/order.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 
 
 
@@ -44,7 +47,9 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     BookListComponent,
     DataFilterPipe,
     BookDetailComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    OrderComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,9 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     PaymentService,
     ShippingService,
     BookService,
-    CartService
+    CartService,
+    OrderService,
+    CheckoutService
   ],
   bootstrap: [AppComponent]
 })
