@@ -9,6 +9,9 @@ import { ShippingService } from '../../services/shipping.service';
 import { UserPayment } from '../../models/user-payment';
 import { UserBilling } from '../../models/user-billing';
 import { UserShipping } from "../../models/user-shipping";
+import { Order} from "../../models/order";
+import { OrderService} from "../../services/order.service";
+
 
 @Component({
   selector: 'app-myprofile',
@@ -48,12 +51,17 @@ export class MyprofileComponent implements OnInit {
   private defaultUserShippingId: number;
   private defaultShippingSet: boolean;
 
+  private orderList: Order[] = [];
+  private order : Order = new Order();
+  private displayOrderDetail: boolean;
+
 
   constructor(
     private loginService : LoginService,
     private userService : UserService,
     private paymentService : PaymentService,
     private shippingService : ShippingService,
+    private orderService: OrderService,
     private router: Router
 
   ) { }
@@ -65,6 +73,9 @@ export class MyprofileComponent implements OnInit {
   selectedBillingChange(val: number) {
     this.selectedBillingTab = val;
   }
+
+
+  //user info
 
   onUpdateUserInfo () {
     this.userService.updateUserInfo(this.user, this.newPassword, this.currentPassword).subscribe(
@@ -109,6 +120,8 @@ export class MyprofileComponent implements OnInit {
     );
   }
 
+  //payment info
+
   onNewPayment() {
     this.paymentService.newPayment(this.userPayment).subscribe(
       res => {
@@ -152,6 +165,8 @@ export class MyprofileComponent implements OnInit {
     );
   }
 
+
+  //shipping info
   onNewShipping() {
     this.shippingService.newShipping(this.userShipping).subscribe(
       res => {
@@ -194,6 +209,16 @@ export class MyprofileComponent implements OnInit {
     );
   }
 
+
+
+  //order history
+  onDisplayOrder(order: Order) {
+    console.log(order);
+    this.order = order;
+    this.displayOrderDetail = true;
+  }
+
+
   ngOnInit() {
     this.loginService.checkSession().subscribe(
       res => {
@@ -207,8 +232,17 @@ export class MyprofileComponent implements OnInit {
     );
     this.getCurrentUser();
 
-    for (let s in AppConst.usStates){
-      this.stateList.push(s);
+    this.orderService.getOrderList().subscribe(
+      res => {
+        this.orderList = res.json();
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
+
+    for (let state in AppConst.usStates){
+      this.stateList.push(state);
     }
 
     this.userBilling.userBillingState = "";
