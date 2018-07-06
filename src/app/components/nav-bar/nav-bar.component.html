@@ -3,10 +3,8 @@
 <nav class=" navbar navbar-default navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand pointer" routerLInk="/home">LET'S BOOKSTORE</a>
+			<a class="navbar-brand pointer" routerLink="/home">LET'S BOOKSTORE</a>
 		</div>
-	
-
 		<div id="navbar">
 			<ul class="nav navbar-nav navbar-left">
 				<li>
@@ -16,7 +14,7 @@
 				</li>
 				<form (ngSubmit)="onSearchByTitle()" class="navbar-form">
 					<div class="form-group">
-						<input type="text" name="searchByTitle" [(ngModel)]="keyboard" class="form-control" placeholder="Book Title" />
+						<input type="text" name="searchByTitle" [(ngModel)]= "keyword" class="form-control" placeholder="Book Title" />
 					</div>
 					<button type="submit" class="btn btn-default">Search</button>
 				</form>
@@ -25,13 +23,13 @@
 				<li *ngIf="!loggedIn">
 					<a mat-button routerLink="/myAccount">MY ACCOUNT</a>
 				</li>
-				<li *ngIf="!loggedIn">
-					<a mat-button routerLink="/shoppingCar">MY SHOPPING CART</a>
+				<li *ngIf="loggedIn">
+					<a mat-button routerLink="/shoppingCart">MY SHOPPING CART</a>
 				</li>
-				<li *ngIf="!loggedIn">
-					<a mat-button routerLink="/my Profile">MY PROFILE</a>
+				<li *ngIf="loggedIn">
+					<a mat-button routerLink="/myProfile">MY PROFILE</a>
 				</li>
-				<li *ngIf="!loggedIn">
+				<li *ngIf="loggedIn">
 					<a mat-button (click)="logout()">LOGOUT</a>
 				</li>
 			</ul>

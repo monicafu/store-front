@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService} from "../../services/login.service";
+import { Router, NavigationExtras } from '@angular/router';
+import { BookService} from '../../services/book.service';
+import { Book} from '../../models/book';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +12,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  private loggedIn = false;
+  private keyword: string;
+  private bookList: Book[] = [];
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private bookService: BookService,
+   ) { }
+
+
+  logout() {
+    this.loginService.logout().subscribe(
+      res => {
+        location.reload();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  // optimized after all things done
+  onSearchByTitle() {
+    this.bookService.searchBook(this.keyword).subscribe(
+      res => {
+        this.bookList = res.json();
+        console.log(this.bookList);
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            "bookList" : JSON.stringify(this.bookList)
+          }
+        };
+
+        this.router.navigate(['/bookList'], navigationExtras);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
   ngOnInit() {
+    this.loginService.checkSession().subscribe(
+      res => {
+        this.loggedIn = true;
+      },
+      err => {
+        this.loggedIn = false;
+      }
+    );
   }
 
 }
